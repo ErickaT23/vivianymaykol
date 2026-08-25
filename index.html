@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anthony & Carolina | 26.12.2026</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Anthony & Carolina | 26.12.2026">
+  <meta property="og:description" content="Te invitamos a celebrar nuestro matrimonio en Guatemala.">
+  <meta property="og:image" content="Images/MONOGRAMA.svg">
+  <meta name="keywords" content="invitacion de boda, Anthony, Carolina, boda, Guatemala, celebracion">
+  <meta name="author" content="Two Design | Invitaciones Digitales">
+  <link rel="stylesheet" href="style.css">
+  <!-- (Opcional) Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <!-- ===================== HERO / SOBRE (PORTADA) ===================== -->
+<header class="cover" id="cover">
+  <div class="cover-inner">
+    <p class="tag tag-animated">Nos casamos</p>
+    <h1 class="couple">Vivian <span class="amp">&</span> Maykol</h1>
+
+    <div class="envelope-wrap">
+      <button class="envelope-trigger" id="btnOpenEnvelope" type="button" aria-label="Abrir invitación">
+        <img class="envelope" src="Images/ENVELOPE.png" alt="Sobre invitación">
+        <img class="pearl" src="Images/PERLA.png" alt="Perla dorada decorativa">
+      </button>
+    </div>
+
+    <div class="guest-card">
+      <div class="guest-line" id="guestCardName">Nombre del invitado</div>
+      <div class="guest-sub">Hemos reservado</div>
+      <div class="guest-seats">
+        <span id="guestCardSeats">x</span> <span id="guestCardSeatsTxt">lugares</span> en su honor
+      </div>
+    </div>
+
+    <button class="btn-primary" id="btnOpenInvite" type="button">
+      Abrir invitación
+    </button>
+
+  </div>
+
+</header>
+
+<button class="music-bubble" id="btnMusic" type="button" aria-label="Reproducir música">
+  <i class="fa-solid fa-play" aria-hidden="true"></i>
+</button>
+
+<audio id="bgMusic" preload="auto" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ===================== CONTENIDO INVITACIÓN ===================== -->
+<main id="invitation" class="invitation" aria-hidden="true">
+
+  <!-- HERO FOTO -->
+  <section class="hero-photo fade-in-element" id="hero">
+    <div class="hero-overlay">
+      <div class="hero-composition fade-in-element">
+        <div class="hero-artwork">
+          <img src="Images/E2.png" alt="Vivian y Maykol" class="hero-main-image">
+          <img src="Images/CALA1.png" alt="Cala decorativa" class="hero-flower-image">
+        </div>
+
+        <h2 class="hero-couple-name">
+          <span>Vivian Galvez</span>
+          <span class="hero-couple-amp">&amp;</span>
+          <span>Maykol Roblero</span>
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOMBRES EDITORIAL + FECHA VERTICAL + MÚSICA -->
+  <section class="names-editorial fade-in-element" id="names">
+    <div class="marriage-note">
+      <img src="Images/PERLA.png" alt="Perla decorativa" class="note-pearl">
+
+      <div class="marriage-note-inner">
+        <p class="marriage-note-text">
+          Uniremos nuestra vida en matrimonio con la bendición de Dios y de nuestros amados padres.
+        </p>
+
+        <div class="marriage-note-parents">
+          <div class="marriage-note-parent-block">
+            <h3>Padres de la Novia</h3>
+            <p>Marco Gálvez &amp; Rosaura Mazariegos</p>
+          </div>
+
+          <div class="marriage-note-parent-block">
+            <h3>Padres del Novio</h3>
+            <p>Armando Roblero &amp; Claudia de León</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTADOR -->
+  <section class="countdown fade-in-element" id="countdown">
+    <h3>Solo faltan!</h3>
+
+    <div class="countdown-simple" aria-label="Cuenta regresiva para la boda">
+      <div class="countdown-simple-item">
+        <div class="countdown-simple-digit" id="cdDays">00</div>
+        <div class="countdown-simple-label">Días</div>
+      </div>
+      <div class="countdown-simple-item">
+        <div class="countdown-simple-digit" id="cdHours">00</div>
+        <div class="countdown-simple-label">Horas</div>
+      </div>
+      <div class="countdown-simple-item">
+        <div class="countdown-simple-digit" id="cdMins">00</div>
+        <div class="countdown-simple-label">Minutos</div>
+      </div>
+      <div class="countdown-simple-item">
+        <div class="countdown-simple-digit" id="cdSecs">00</div>
+        <div class="countdown-simple-label">Segundos</div>
+      </div>
+    </div>
+
+    <a class="btn-outline calendar-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Vivian+%26+Maykol&dates=20261129T220000Z/20261130T050000Z&details=Nos+encantar%C3%A1+compartir+este+d%C3%ADa+contigo.&location=Antigua+Guatemala" target="_blank" rel="noopener">Agregar al calendario</a>
+
+    <div class="countdown-events">
+      <article class="ceremony-note">
+        <div class="ceremony-note-inner">
+          <img src="Images/CHURCH.png" alt="Iglesia" class="event-note-icon">
+          <h4>Ceremonia</h4>
+          <p class="event-note-place">Conceptio</p>
+          <p class="event-note-time">4:00 pm</p>
+          <p class="event-note-location">Antigua Guatemala</p>
+          <a class="btn-outline" href="https://maps.app.goo.gl/Xsf621ZbtQx2e2rM8" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+      </article>
+
+      <article class="reception-oval-wrap">
+        <img src="Images/CALA2.png" alt="Cala decorativa" class="reception-cala">
+        <div class="reception-oval">
+          <img src="Images/RECEPTION.png" alt="Recepción" class="event-note-icon">
+          <h4>Recepción</h4>
+          <p class="event-note-place">Conceptio</p>
+          <p class="event-note-time">6:00 pm</p>
+          <p class="event-note-location">Antigua Guatemala</p>
+          <a class="btn-outline" href="https://maps.app.goo.gl/Xsf621ZbtQx2e2rM8" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="itinerary-editorial fade-in-element" id="itinerary">
+    <div class="itinerary-editorial-art">
+      <img src="Images/E3.png" alt="Itinerario" class="itinerary-editorial-image">
+
+      <div class="itinerary-editorial-note">
+        <h3>Itinerario</h3>
+
+        <div class="itinerary-track">
+          <div class="timeline-item">
+            <img src="Images/1.png" alt="Ingreso de invitados" class="timeline-icon">
+            <div class="timeline-node" aria-hidden="true">
+              <span class="timeline-dot"></span>
+              <span class="timeline-connector"></span>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-time">15:00 hrs</p>
+              <p class="timeline-text">Ingreso de los invitados por Plaza Ermita</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <img src="Images/CHURCH.png" alt="Ceremonia" class="timeline-icon">
+            <div class="timeline-node" aria-hidden="true">
+              <span class="timeline-dot"></span>
+              <span class="timeline-connector"></span>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-time">16:00 hrs</p>
+              <p class="timeline-text">Inicio de Ceremonia en Plaza Ermita</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <img src="Images/3.png" alt="Cóctel" class="timeline-icon">
+            <div class="timeline-node" aria-hidden="true">
+              <span class="timeline-dot"></span>
+              <span class="timeline-connector"></span>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-time">17:00 hrs</p>
+              <p class="timeline-text">Inicio de Coctel en Terraza y Piscina</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <img src="Images/4.png" alt="Ingreso a Plaza las Flores" class="timeline-icon">
+            <div class="timeline-node" aria-hidden="true">
+              <span class="timeline-dot"></span>
+              <span class="timeline-connector"></span>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-time">18:00 hrs</p>
+              <p class="timeline-text">Ingreso de los invitados al área de Plaza las Flores</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <img src="Images/5.png" alt="Ingreso de los novios" class="timeline-icon">
+            <div class="timeline-node" aria-hidden="true">
+              <span class="timeline-dot"></span>
+              <span class="timeline-connector"></span>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-time">18:15 hrs</p>
+              <p class="timeline-text">Ingreso de los novios a Plaza las Flores</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <img src="Images/6.png" alt="Primer baile" class="timeline-icon">
+            <div class="timeline-node" aria-hidden="true">
+              <span class="timeline-dot"></span>
+              <span class="timeline-connector"></span>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-time">18:20 hrs</p>
+              <p class="timeline-text">Primer Baile como esposos y familia</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <img src="Images/RECEPTION.png" alt="Recepción" class="timeline-icon">
+            <div class="timeline-node" aria-hidden="true">
+              <span class="timeline-dot"></span>
+              <span class="timeline-connector"></span>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-time">18:25 hrs</p>
+              <p class="timeline-text">Brindis</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <img src="Images/8.png" alt="Servicio de cena" class="timeline-icon">
+            <div class="timeline-node" aria-hidden="true">
+              <span class="timeline-dot"></span>
+              <span class="timeline-connector"></span>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-time">18:30 hrs</p>
+              <p class="timeline-text">Servicio de Cena</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <img src="Images/9.png" alt="Pastel" class="timeline-icon">
+            <div class="timeline-node" aria-hidden="true">
+              <span class="timeline-dot"></span>
+              <span class="timeline-connector"></span>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-time">20:00 hrs</p>
+              <p class="timeline-text">Corte simbólico y servicio del pastel</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <img src="Images/10.png" alt="Fin de la recepción" class="timeline-icon">
+            <div class="timeline-node" aria-hidden="true">
+              <span class="timeline-dot"></span>
+              <span class="timeline-connector"></span>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-time">23:00 hrs</p>
+              <p class="timeline-text">Fin de la recepción</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dress-editorial fade-in-element" id="dressCode">
+    <h3>Dress Code</h3>
+    <p class="dress-editorial-subtitle">Elegante y formal</p>
+    <p class="dress-editorial-text">Ellos: traje formal. Ellas: vestido largo con tacón ancho, ideal para jardín. Agradecemos evitar los colores blanco, azul marino y coñac, así como jeans y vestidos corto.</p>
+
+    <div class="dress-editorial-swatches" aria-label="Colores a evitar">
+      <span class="dress-swatch dress-swatch-white" aria-label="Blanco"></span>
+      <span class="dress-swatch dress-swatch-navy" aria-label="Azul marino"></span>
+      <span class="dress-swatch dress-swatch-cognac" aria-label="Coñac"></span>
+    </div>
+  </section>
+
+  <section class="gift-editorial fade-in-element" id="giftSection">
+    <h3>Regalo</h3>
+    <p class="gift-editorial-text">Nuestra mayor alegría es contar con tu compañía. Si deseas tener un detalle con nosotros, agradeceremos con mucho cariño tu obsequio en nuestra lluvia de sobres.</p>
+  </section>
+
+  <section class="full-sep full-sep-rotating" id="celebrationSep">
+    <img id="celebrationSepImg" src="Images/C1.png" alt="Galería de celebración">
+  </section>
+
+<!-- ================= MODAL TRANSFERENCIA ================= -->
+<div id="transferBackdrop" class="transfer-backdrop" aria-hidden="true" style="display:none">
+  <div class="transfer-modal" role="dialog" aria-modal="true">
+
+    <button class="transfer-close" id="btnCloseTransfer" type="button">×</button>
+
+    <h3>Datos de Transferencia</h3>
+
+    <p class="transfer-names">Carolina López</p>
+
+    <div class="transfer-info" id="transferData">
+      <p><strong>Medio:</strong> <span id="bankName">Transferencia bancaria</span></p>
+      <p><strong>Cuenta monetaria:</strong> <span id="accountNumber">1230003756</span></p>
+      <p><strong>Tipo:</strong> <span id="accountType">Monetaria</span></p>
+      <p><strong>Nombre:</strong> <span id="accountOwner">Carolina López</span></p>
+    </div>
+    
+    <button class="btn-outline copy-btn" id="btnCopyAccount" type="button">
+      Copiar datos bancarios
+    </button>
+
+    <div id="copyToast" class="copy-toast" style="display:none">✅ Copiado</div>
+
+  </div>
+</div>
+
+<section class="wishes fade-in-element" id="wishesSection">
+  <h3>Buenos deseos</h3>
+  <p class="wishes-intro">Déjanos un mensaje especial para este día tan importante.</p>
+  <div class="collapsible-panel is-open" id="wishFormPanel" aria-hidden="false">
+    <form class="wish-form" id="wish-form">
+      <input id="wish-name" type="text" placeholder="Tu nombre" autocomplete="name" required>
+      <textarea id="wish-message" rows="4" placeholder="Escribe tu mensaje" required></textarea>
+      <button class="btn-outline" type="submit">Enviar mensaje</button>
+      <p class="wish-status" id="wish-status" aria-live="polite"></p>
+    </form>
+  </div>
+  <div class="collapsible-panel is-open" id="wishesPanel" aria-hidden="false">
+    <div class="wishes-list" id="wishes"></div>
+  </div>
+</section>
+
+  <!-- RSVP (TU BLOQUE) -->
+  <!-- Pega aquí exactamente tu sección RSVP + Modal (como lo enviaste) -->
+  <!-- ================= RSVP SECTION ================= -->
+<section class="rsvp fade-in-element" id="rsvpSection">
+  <div class="event-icon">
+    <img src="Images/RSVP.svg" alt="RSVP">
+  </div>
+  <h3>Confirmar Asistencia</h3>
+  <p class="rsvp-strong">
+    Para nosotros es muy importante que confirmes tu asistencia lo antes posible,
+    o bien indicarnos si no podrás acompañarnos.
+  </p>
+
+  <form id="rsvp-form" class="rsvp-form" novalidate>
+    <div class="form-group">
+      <label for="rsvp-name">Nombre del invitado</label>
+      <input type="text" id="rsvp-name" name="name" value="Nombre del invitado" readonly>
+    </div>
+
+    <div class="form-group">
+      <p class="rsvp-label">Asistirás</p>
+      <div class="rsvp-response-group">
+        <label class="rsvp-radio-option" for="rsvp-response-yes">
+          <input type="radio" id="rsvp-response-yes" name="attendance" value="SI">
+          <span>Sí, con mucho gusto</span>
+        </label>
+        <label class="rsvp-radio-option" for="rsvp-response-no">
+          <input type="radio" id="rsvp-response-no" name="attendance" value="NO">
+          <span>No, lamentablemente no podré</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group" id="guest-count-wrapper" style="display:none">
+      <label for="guest-count">Cantidad de pases</label>
+      <select id="guest-count" name="guests" disabled></select>
+    </div>
+
+    <button type="submit" id="btnConfirmarRsvp">Confirmar asistencia</button>
+  </form>
+
+  <div id="msgRsvp" class="rsvp-msg" style="display:none"></div>
+</section>
+
+  <!-- FRASE FINAL -->
+  <section class="love-quote fade-in-element" id="love">
+    <p class="quote-script">Para nosotros será un privilegio compartir contigo un momento tan especial.</p>
+  </section>
+
+  <!-- FOTO CAMBIANTE -->
+  <section class="full-sep full-sep-rotating" id="rotatingSep">
+    <img id="rotatingSepImg" src="Images/V4.jpg" alt="Foto pareja">
+  </section>
+
+  <!-- CIERRE -->
+  <section class="closing fade-in-element" id="closing">
+    <div class="mono">
+      <img src="Images/MONOGRAMA-BLACK.svg" alt="Monograma Anthony & Carolina" class="mono-img">
+    </div>
+    <h3>Anthony & Carolina</h3>
+    <p>26 de diciembre de 2026</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div id="social-icons">
+<a href="https://wa.me/50236011737" target="_blank" aria-label="Whatsapp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+<a href="https://www.facebook.com/thetwodesign" target="_blank" aria-label="Facebook">
+  <i class="fab fa-facebook"></i>
+</a>
+    <a href="https://www.instagram.com/thetwodesign" target="_blank" aria-label="Instagram">
+  <i class="fab fa-instagram"></i>
+</a>
+</div>
+    <div class="footer-logo">
+      <img id="footer-logo" alt="Logo de la empresa" src="Images/logo.png">
+    </div>
+  </footer>
+
+</main>
+<script src="config.js"></script>
+<script type="module" src="database.js"></script>
+<script src="loads.js"></script>
+<script src="rsvp.js"></script>
+<script type="module" src="wishes.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
+  
