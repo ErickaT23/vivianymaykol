@@ -249,12 +249,16 @@ function initRotatingSep(imageId, images){
     setTimeout(() => {
 
       currentIndex = (currentIndex + 1) % images.length;
-
-      imgEl.src = images[currentIndex];
-
       imgEl.onload = () => {
         imgEl.style.opacity = 1;
       };
+
+      imgEl.src = images[currentIndex];
+
+      // Si la imagen ya estaba en caché, garantizamos recuperar la opacidad.
+      setTimeout(() => {
+        imgEl.style.opacity = 1;
+      }, 120);
 
     }, 400);
 

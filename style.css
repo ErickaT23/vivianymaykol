@@ -1038,7 +1038,7 @@ a{
     color: var(--olive-dark);
   }
   .date-highlight{
-    padding: 8px 18px 24px;
+    padding: 10px 18px 24px;
     text-align: center;
   }
   .date-highlight-label,
@@ -1047,17 +1047,18 @@ a{
   }
   .date-highlight-label{
     font-family: var(--cursive);
-    font-size: 34px;
+    font-size: 38px;
+    line-height: 1;
     background: var(--rose-gold-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .date-highlight-value{
-    margin-top: 2px;
+    margin-top: 6px;
     font-family: var(--title);
-    font-size: 18px;
-    letter-spacing: 0.22em;
+    font-size: 19px;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: #23406f;
   }
@@ -1463,7 +1464,7 @@ a{
     box-shadow: 0 3px 8px rgba(111,61,43,.04);
   }
   .rsvp-form{
-    margin:-70px auto 0;
+    margin:-10px auto 0;
     gap:0;
   }
   .rsvp #btnConfirmarRsvp{
