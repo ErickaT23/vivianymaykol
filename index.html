@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anthony & Carolina | 26.12.2026</title>
+  <title>Vivian &amp; Maykol | 29.11.2026</title>
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Anthony & Carolina | 26.12.2026">
-  <meta property="og:description" content="Te invitamos a celebrar nuestro matrimonio en Guatemala.">
-  <meta property="og:image" content="Images/MONOGRAMA.svg">
-  <meta name="keywords" content="invitacion de boda, Anthony, Carolina, boda, Guatemala, celebracion">
+  <meta property="og:title" content="Vivian &amp; Maykol | 29.11.2026">
+  <meta property="og:description" content="Te invitamos a celebrar nuestro matrimonio en Antigua Guatemala.">
+  <meta property="og:image" content="Images/E2.png">
+  <meta name="keywords" content="invitacion de boda, Vivian, Maykol, boda, Antigua Guatemala, celebracion">
   <meta name="author" content="Two Design | Invitaciones Digitales">
   <link rel="stylesheet" href="style.css">
   <!-- (Opcional) Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
@@ -313,13 +313,13 @@
 
     <h3>Datos de Transferencia</h3>
 
-    <p class="transfer-names">Carolina López</p>
+    <p class="transfer-names">Vivian Galvez</p>
 
     <div class="transfer-info" id="transferData">
       <p><strong>Medio:</strong> <span id="bankName">Transferencia bancaria</span></p>
       <p><strong>Cuenta monetaria:</strong> <span id="accountNumber">1230003756</span></p>
       <p><strong>Tipo:</strong> <span id="accountType">Monetaria</span></p>
-      <p><strong>Nombre:</strong> <span id="accountOwner">Carolina López</span></p>
+      <p><strong>Nombre:</strong> <span id="accountOwner">Vivian Galvez</span></p>
     </div>
     
     <button class="btn-outline copy-btn" id="btnCopyAccount" type="button">
@@ -334,7 +334,11 @@
 <section class="wishes fade-in-element" id="wishesSection">
   <h3>Buenos deseos</h3>
   <p class="wishes-intro">Déjanos un mensaje especial para este día tan importante.</p>
-  <div class="collapsible-panel is-open" id="wishFormPanel" aria-hidden="false">
+  <div class="wishes-actions">
+    <button class="btn-outline" id="btnToggleWishForm" type="button" aria-controls="wishFormPanel" aria-expanded="false">Enviar un mensaje</button>
+    <button class="btn-outline" id="btnToggleWishes" type="button" aria-controls="wishesPanel" aria-expanded="false">Leer mensajes</button>
+  </div>
+  <div class="collapsible-panel" id="wishFormPanel" aria-hidden="true">
     <form class="wish-form" id="wish-form">
       <input id="wish-name" type="text" placeholder="Tu nombre" autocomplete="name" required>
       <textarea id="wish-message" rows="4" placeholder="Escribe tu mensaje" required></textarea>
@@ -342,80 +346,73 @@
       <p class="wish-status" id="wish-status" aria-live="polite"></p>
     </form>
   </div>
-  <div class="collapsible-panel is-open" id="wishesPanel" aria-hidden="false">
+  <div class="collapsible-panel" id="wishesPanel" aria-hidden="true">
     <div class="wishes-list" id="wishes"></div>
   </div>
 </section>
 
-  <!-- RSVP (TU BLOQUE) -->
-  <!-- Pega aquí exactamente tu sección RSVP + Modal (como lo enviaste) -->
-  <!-- ================= RSVP SECTION ================= -->
-<section class="rsvp fade-in-element" id="rsvpSection">
-  <div class="event-icon">
-    <img src="Images/RSVP.svg" alt="RSVP">
-  </div>
-  <h3>Confirmar Asistencia</h3>
-  <p class="rsvp-strong">
-    Para nosotros es muy importante que confirmes tu asistencia lo antes posible,
-    o bien indicarnos si no podrás acompañarnos.
-  </p>
-
-  <form id="rsvp-form" class="rsvp-form" novalidate>
-    <div class="form-group">
-      <label for="rsvp-name">Nombre del invitado</label>
-      <input type="text" id="rsvp-name" name="name" value="Nombre del invitado" readonly>
-    </div>
-
-    <div class="form-group">
-      <p class="rsvp-label">Asistirás</p>
-      <div class="rsvp-response-group">
-        <label class="rsvp-radio-option" for="rsvp-response-yes">
-          <input type="radio" id="rsvp-response-yes" name="attendance" value="SI">
-          <span>Sí, con mucho gusto</span>
-        </label>
-        <label class="rsvp-radio-option" for="rsvp-response-no">
-          <input type="radio" id="rsvp-response-no" name="attendance" value="NO">
-          <span>No, lamentablemente no podré</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group" id="guest-count-wrapper" style="display:none">
-      <label for="guest-count">Cantidad de pases</label>
-      <select id="guest-count" name="guests" disabled></select>
-    </div>
-
-    <button type="submit" id="btnConfirmarRsvp">Confirmar asistencia</button>
-  </form>
-
-  <div id="msgRsvp" class="rsvp-msg" style="display:none"></div>
+<section class="adults-only fade-in-element" id="adultsOnlySection">
+  <h3>Solo adultos</h3>
+  <p class="adults-only-text">Amamos a sus pequeños; sin embargo, por las características del lugar y pensando en su seguridad, hemos decidido celebrar este momento únicamente entre adultos.</p>
 </section>
 
-  <!-- FRASE FINAL -->
-  <section class="love-quote fade-in-element" id="love">
-    <p class="quote-script">Para nosotros será un privilegio compartir contigo un momento tan especial.</p>
-  </section>
+<section class="rsvp fade-in-element" id="rsvpSection">
+  <div class="rsvp-editorial-art">
+    <h3 class="rsvp-editorial-title">Confirmar Asistencia</h3>
+    <p class="rsvp-strong rsvp-editorial-copy">
+      Para nosotros es muy importante que confirmes tu asistencia lo antes posible,
+      o bien indicarnos si no podrás acompañarnos.
+    </p>
+    <img src="Images/E4.png" alt="Confirmar asistencia" class="rsvp-editorial-image">
+    <img src="Images/CALA1.png" alt="Cala decorativa" class="rsvp-editorial-flower">
+
+    <div class="rsvp-editorial-note">
+      <form id="rsvp-form" class="rsvp-form" novalidate>
+        <div class="form-group">
+          <input type="text" id="rsvp-name" name="name" value="Nombre del invitado" readonly>
+        </div>
+
+        <div class="form-group">
+          <p class="rsvp-label">Asistirás</p>
+          <div class="rsvp-response-group">
+            <label class="rsvp-radio-option" for="rsvp-response-yes">
+              <input type="radio" id="rsvp-response-yes" name="attendance" value="SI">
+              <span>Sí, con mucho gusto</span>
+            </label>
+            <label class="rsvp-radio-option" for="rsvp-response-no">
+              <input type="radio" id="rsvp-response-no" name="attendance" value="NO">
+              <span>No, lamentablemente no podré</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" id="guest-count-wrapper" style="display:none">
+          <label for="guest-count">Cantidad de pases</label>
+          <select id="guest-count" name="guests" disabled></select>
+        </div>
+
+        <button type="submit" id="btnConfirmarRsvp">Confirmar asistencia</button>
+      </form>
+
+      <div id="msgRsvp" class="rsvp-msg" style="display:none"></div>
+    </div>
+  </div>
+</section>
 
   <!-- FOTO CAMBIANTE -->
   <section class="full-sep full-sep-rotating" id="rotatingSep">
-    <img id="rotatingSepImg" src="Images/V4.jpg" alt="Foto pareja">
+    <img id="rotatingSepImg" src="Images/F1.png" alt="Foto pareja">
   </section>
 
   <!-- CIERRE -->
   <section class="closing fade-in-element" id="closing">
-    <div class="mono">
-      <img src="Images/MONOGRAMA-BLACK.svg" alt="Monograma Anthony & Carolina" class="mono-img">
-    </div>
-    <h3>Anthony & Carolina</h3>
-    <p>26 de diciembre de 2026</p>
+    <p class="closing-subtitle">con amor</p>
+    <h3>Vivian &amp; Maykol</h3>
   </section>
 
   <!-- FOOTER -->
   <footer id="footer">
     <div id="social-icons">
-<a href="https://wa.me/50236011737" target="_blank" aria-label="Whatsapp">
-  <i class="fab fa-whatsapp"></i>
-</a>
 <a href="https://www.facebook.com/thetwodesign" target="_blank" aria-label="Facebook">
   <i class="fab fa-facebook"></i>
 </a>

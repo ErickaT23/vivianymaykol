@@ -11,7 +11,7 @@ const firebaseConfig = {
   appId: "1:577908051871:web:27fbd4e06b3d18da14b7aa"
 };
 
-const EVENT_ID = "anthonycarolina2026";
+const EVENT_ID = window.config?.event?.defaultEventId || "vivianmaykol2026";
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const db = getDatabase(app, firebaseConfig.databaseURL);
 const wishesRef = ref(db, `eventos/${EVENT_ID}/deseos`);

@@ -10,7 +10,7 @@ const guests = [
 
 window.LocalGuestSeeds = {
   ...(window.LocalGuestSeeds || {}),
-  anthonycarolina2026: guests.reduce((acc, guest) => {
+  vivianmaykol2026: guests.reduce((acc, guest) => {
     acc[String(guest.id)] = {
       id: String(guest.id),
       nombre: guest.name,
@@ -21,8 +21,8 @@ window.LocalGuestSeeds = {
   }, {}),
 };
 
-window.seedEventGuestsToFirebase = async function seedEventGuestsToFirebase() {
-  const eventId = window.config?.event?.defaultEventId || "anthonycarolina2026";
+window.seedEventGuestsToFirebase = async function seedEventGuestsToFirebase(explicitEventId) {
+  const eventId = explicitEventId || window.config?.event?.defaultEventId || "vivianmaykol2026";
   const rsvpDB = window.RSVPDatabase;
 
   if (!rsvpDB?.migrateLocalGuestsToFirebase) {

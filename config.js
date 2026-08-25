@@ -10,7 +10,7 @@ const firebaseConfig = {
 
 const config = {
   event: {
-    defaultEventId: "anthonycarolina2026",
+    defaultEventId: "vivianmaykol2026",
     databaseURL: firebaseConfig.databaseURL,
     eventIdParam: "eventId",
     legacyFallback: {
@@ -19,15 +19,20 @@ const config = {
       subscribe: false
     }
   },
+  admin: {
+    adminKey: "twodesign123",
+    keyParam: "key",
+    legacyKeyParam: "admin"
+  },
   seo: {
-    titulo: "Anthony & Carolina | 26.12.2026",
-    descripcion: "Boda de Anthony de León López y Carolina López - 26 de diciembre de 2026",
+    titulo: "Vivian & Maykol | 29.11.2026",
+    descripcion: "Boda de Vivian Galvez y Maykol Roblero - 29 de noviembre de 2026",
     autor: "Two Design"
   },
   pareja: {
-    nombres: "Anthony & Carolina",
-    fecha: "26-12-2026",
-    fechaVisible: "26.12.2026"
+    nombres: "Vivian & Maykol",
+    fecha: "29-11-2026",
+    fechaVisible: "29.11.2026"
   },
   musica: {
     titulo: "Nuestra Canción",
@@ -36,17 +41,17 @@ const config = {
   evento: {
     ceremonia: {
       titulo: "Ceremonia",
-      lugar: "Hacienda San Isidro",
-      hora: "3:00 PM",
-      direccion: "5ta avenida 7-20 zona 6 de Villa Nueva, Guatemala.",
-      ubicacionUrl: "https://maps.app.goo.gl/PZ2Fnbd73NSX3LwZ8"
+      lugar: "Conceptio",
+      hora: "4:00 PM",
+      direccion: "Antigua Guatemala",
+      ubicacionUrl: "https://maps.app.goo.gl/Xsf621ZbtQx2e2rM8"
     },
     recepcion: {
       titulo: "Recepción",
-      lugar: "Hacienda San Isidro",
-      hora: "4:00 PM",
-      direccion: "5ta avenida 7-20 zona 6 de Villa Nueva, Guatemala.",
-      ubicacionUrl: "https://maps.app.goo.gl/PZ2Fnbd73NSX3LwZ8"
+      lugar: "Conceptio",
+      hora: "6:00 PM",
+      direccion: "Antigua Guatemala",
+      ubicacionUrl: "https://maps.app.goo.gl/Xsf621ZbtQx2e2rM8"
     }
   },
   textos: {
@@ -54,7 +59,7 @@ const config = {
     mensajePases: "Hemos reservado {pases} lugares en su honor"
   },
   footer: {
-    hashtag: "#AnthonyYCarolina",
+    hashtag: "#VivianYMaykol",
     instagramUrl: "https://www.instagram.com/thetwodesign",
     facebookUrl: "https://www.facebook.com/thetwodesign",
     marcaTexto: "Diseño",

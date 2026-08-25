@@ -48,17 +48,21 @@ function getEventRsvpPath(eventId) {
   return `${getEventBasePath(eventId)}/rsvp`;
 }
 
+function getEventRsvpRecordPath(eventId, guestId) {
+  return `${getEventRsvpPath(eventId)}/${sanitizeFirebaseKey(guestId)}`;
+}
+
 function buildEventConfigSeedPayload(source = window.config) {
   if (!source) return null;
   return {
     eventId: resolveEventId(source?.event?.defaultEventId),
-    bride: "Carolina López",
-    groom: "Anthony de León López",
-    date: "2026-12-26",
-    time: "15:00",
+    bride: "Vivian Galvez",
+    groom: "Maykol Roblero",
+    date: "2026-11-29",
+    time: "16:00",
     timezone: "America/Guatemala",
-    venue: "Hacienda San Isidro",
-    reception: "Hacienda San Isidro"
+    venue: source?.evento?.ceremonia?.lugar || "Conceptio",
+    reception: source?.evento?.recepcion?.lugar || "Conceptio"
   };
 }
 
@@ -100,6 +104,77 @@ async function getInvitadoById(eventId, guestId) {
   return snapshot.exists() ? snapshot.val() : null;
 }
 
+async function getConfirmationByGuestId(eventId, guestId) {
+  const snapshot = await get(ref(db, getEventRsvpRecordPath(resolveEventId(eventId), guestId)));
+  return snapshot.exists() ? snapshot.val() : null;
+}
+
+async function saveConfirmation(eventId, confirmation) {
+  const guestId = sanitizeFirebaseKey(confirmation?.id || confirmation?.guestId);
+  const payload = {
+    id: String(confirmation?.id || confirmation?.guestId || guestId),
+    nombre: String(confirmation?.nombre || "Invitado").trim() || "Invitado",
+    pasesAsignados: Math.max(0, Number(confirmation?.pasesAsignados) || 0),
+    respuesta: String(confirmation?.respuesta || "pendiente").trim().toLowerCase() === "no" ? "no" : "si",
+    cantidadConfirmada: String(confirmation?.respuesta || "").trim().toLowerCase() === "no"
+      ? 0
+      : Math.max(0, Number(confirmation?.cantidadConfirmada) || 0),
+    fechaConfirmacion: Number(confirmation?.fechaConfirmacion) || Date.now(),
+  };
+
+  await set(ref(db, getEventRsvpRecordPath(resolveEventId(eventId), guestId)), payload);
+  return payload;
+}
+
+function mapSnapshotToArray(snapshot) {
+  const raw = snapshot?.val();
+  if (!raw || typeof raw !== "object") return [];
+
+  return Object.entries(raw)
+    .filter(([, value]) => value && typeof value === "object")
+    .map(([key, value]) => ({
+      id: String(value.id || key),
+      ...value,
+    }));
+}
+
+function subscribeToConfirmations(eventId, callback, onError) {
+  return onValue(
+    ref(db, getEventRsvpPath(resolveEventId(eventId))),
+    (snapshot) => callback(mapSnapshotToArray(snapshot)),
+    onError
+  );
+}
+
+function subscribeToInvitados(eventId, callback, onError) {
+  return onValue(
+    ref(db, getEventInvitadosPath(resolveEventId(eventId))),
+    (snapshot) => callback(mapSnapshotToArray(snapshot).sort((a, b) => String(a?.nombre || "").localeCompare(String(b?.nombre || ""), "es"))),
+    onError
+  );
+}
+
+async function updateInvitado(eventId, guestId, payload) {
+  const targetEventId = resolveEventId(eventId);
+  const targetGuestId = sanitizeFirebaseKey(guestId);
+  const current = await getInvitadoById(targetEventId, targetGuestId);
+  const next = {
+    id: String(payload?.id || current?.id || targetGuestId),
+    nombre: String(payload?.nombre || current?.nombre || "Invitado").trim() || "Invitado",
+    pases: Math.max(1, Number(payload?.pases ?? current?.pases ?? 1) || 1),
+    activo: typeof payload?.activo === "boolean" ? payload.activo : (typeof current?.activo === "boolean" ? current.activo : true),
+  };
+
+  await set(ref(db, `${getEventInvitadosPath(targetEventId)}/${targetGuestId}`), next);
+  return next;
+}
+
+async function deleteInvitado(eventId, guestId) {
+  const current = await getInvitadoById(eventId, guestId);
+  if (!current) return null;
+  return updateInvitado(eventId, guestId, { ...current, activo: false });
+}
+
 async function saveWish(eventId, wish) {
   const wishesRef = ref(db, getEventDeseosPath(resolveEventId(eventId)));
   return push(wishesRef, wish);
@@ -126,6 +201,12 @@ window.RSVPDatabase = {
   seedEventConfigToFirebase,
   migrateLocalGuestsToFirebase,
   getInvitadoById,
+  getConfirmationByGuestId,
+  saveConfirmation,
+  subscribeToConfirmations,
+  subscribeToInvitados,
+  updateInvitado,
+  deleteInvitado,
   saveWish,
   subscribeToWishes
 };

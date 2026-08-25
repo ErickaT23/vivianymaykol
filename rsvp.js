@@ -5,7 +5,7 @@ const RSVP_ENDPOINT =
 const $ = (s) => document.querySelector(s);
 
 function getEventId() {
-  return window.config?.event?.defaultEventId || "anthonycarolina2026";
+  return window.config?.event?.defaultEventId || "vivianmaykol2026";
 }
 
 function getRemoteGuestId(guestId) {
@@ -54,6 +54,24 @@ async function apiSend(data) {
   } catch {
     console.warn("apiSend no devolvió JSON. Respuesta:", text.slice(0, 200));
     return { ok: false, raw: text };
+  }
+}
+
+async function saveConfirmationToFirebase(invitado, respuesta, pasesSeleccionados) {
+  const rsvpDB = window.RSVPDatabase;
+  if (!rsvpDB?.saveConfirmation || !invitado?.id) return;
+
+  try {
+    await rsvpDB.saveConfirmation(getEventId(), {
+      id: String(invitado.id),
+      nombre: invitado.nombre,
+      pasesAsignados: Math.max(1, Number(invitado.pases || 1)),
+      respuesta: String(respuesta || "").toLowerCase(),
+      cantidadConfirmada: respuesta === "SI" ? pasesSeleccionados : 0,
+      fechaConfirmacion: Date.now(),
+    });
+  } catch (error) {
+    console.warn("No se pudo guardar la confirmación en Firebase:", error);
   }
 }
 
@@ -227,6 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (res && (res.ok === true || res.success === true)) {
+        await saveConfirmationToFirebase(invitado, respuesta, pasesSeleccionados);
         const okMessage = respuesta === "SI"
           ? "Gracias por confirmar tu asistencia. Será un privilegio compartir este día contigo."
           : "Lamentamos que no puedas acompañarnos en esta ocasión y agradecemos de corazón tu respuesta.";

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin RSVP | Vivian &amp; Maykol</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --surface-soft: #fbf9fc;
+      --text: #111111;
+      --text-soft: #6a6470;
+      --line: #ece7f1;
+      --line-strong: #ddd3e8;
+      --brand-purple: #6c2bd9;
+      --brand-orange: #ff7a1a;
+      --brand-rose: #d6a0b5;
+      --brand-mocha: #9b7a67;
+      --danger: #e53935;
+      --shadow-soft: 0 10px 30px rgba(30, 10, 50, 0.08);
+      --shadow-card: 0 8px 18px rgba(20, 20, 30, 0.06);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 9px;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: var(--bg); color: var(--text); }
+    .wrap { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; padding: 1.5rem 0 2.5rem; }
+    .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); }
+    .hidden { display: none !important; }
+    .header { padding: 1.4rem; border-bottom: 1px solid var(--line); text-align: center; }
+    .title { margin: 0; font-size: 1.6rem; font-weight: 800; }
+    .subtitle { margin: 0.45rem 0 0; color: var(--text-soft); }
+    .subtitle strong { color: var(--brand-mocha); background: #f6efe9; border: 1px solid #e8dbd0; border-radius: 999px; padding: 0.1rem 0.45rem; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.9rem; padding: 1.1rem 1.4rem; }
+    .card { border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); padding: 0.9rem; box-shadow: var(--shadow-card); text-align: center; position: relative; }
+    .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--brand-purple); }
+    .card:nth-child(2)::before { background: var(--brand-orange); }
+    .card:nth-child(3)::before { background: var(--brand-rose); }
+    .card:nth-child(4)::before { background: var(--brand-mocha); }
+    .card-label { margin: 0; font-size: 0.72rem; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+    .card-value { margin: 0.5rem 0 0; font-size: 1.8rem; font-weight: 800; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; padding: 0 1.4rem 1rem; }
+    .btn { border: 1px solid #d8c6fb; background: #f5eeff; color: #5f2cc3; border-radius: 10px; padding: 0.65rem 0.95rem; cursor: pointer; font-size: 0.9rem; font-weight: 700; }
+    .btn-secondary { background: #fff8de; color: #9a6b00; border-color: #efd98f; }
+    .status { text-align: center; color: var(--text-soft); padding: 0 1.4rem 1rem; }
+    .form-wrap { border-top: 1px solid var(--line); padding: 1rem 1.4rem; }
+    .form-grid { display: grid; grid-template-columns: 2fr 1fr auto auto; gap: 0.75rem; align-items: end; }
+    label { display: grid; gap: 0.3rem; font-size: 0.78rem; color: var(--text-soft); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    input[type="text"], input[type="number"] { min-height: 42px; border-radius: 10px; border: 1px solid var(--line-strong); padding: 0.7rem 0.8rem; font: inherit; }
+    .check { display: flex; align-items: center; gap: 0.45rem; min-height: 42px; }
+    .table-wrap { padding: 0 1.4rem 1.4rem; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 820px; }
+    th, td { padding: 0.8rem 0.65rem; border-bottom: 1px solid var(--line); text-align: left; }
+    th { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .btn-mini { border: 1px solid var(--line-strong); background: #fff; border-radius: 8px; padding: 0.45rem 0.65rem; cursor: pointer; }
+    .btn-mini-danger { color: var(--danger); }
+    .restricted { padding: 2rem; text-align: center; }
+    @media (max-width: 860px) {
+      .metrics, .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section id="restricted" class="panel restricted hidden">
+      <h1>Acceso restringido</h1>
+      <p>La clave de administrador es inválida.</p>
+    </section>
+
+    <section id="admin-app" class="panel hidden">
+      <header class="header">
+        <h1 class="title">Panel Admin RSVP</h1>
+        <p class="subtitle"><span id="admin-couple">Vivian &amp; Maykol</span> <strong id="active-event-id">--</strong></p>
+      </header>
+
+      <section class="metrics">
+        <article class="card"><p class="card-label">Invitaciones activas</p><p class="card-value" id="metric-total">0</p></article>
+        <article class="card"><p class="card-label">Confirmados</p><p class="card-value" id="metric-yes">0</p></article>
+        <article class="card"><p class="card-label">Pendientes</p><p class="card-value" id="metric-pending">0</p></article>
+        <article class="card"><p class="card-label">No asistirán</p><p class="card-value" id="metric-no">0</p></article>
+      </section>
+
+      <div class="toolbar">
+        <button type="button" class="btn" id="btn-seed">Crear / Actualizar evento en Firebase</button>
+        <button type="button" class="btn btn-secondary" id="btn-copy-links">Copiar links</button>
+      </div>
+
+      <p class="status" id="admin-status">Inicializando panel...</p>
+
+      <div class="form-wrap">
+        <form id="invite-form" class="form-grid">
+          <label>
+            Nombre del invitado
+            <input id="invite-name" type="text" required>
+          </label>
+          <label>
+            Pases
+            <input id="invite-pases" type="number" min="1" value="1" required>
+          </label>
+          <label class="check">
+            <input id="invite-active" type="checkbox" checked>
+            Activo
+          </label>
+          <button type="submit" class="btn" id="btn-save-invite">Guardar invitado</button>
+        </form>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Pases</th>
+              <th>Estado RSVP</th>
+              <th>Activo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="admin-rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="loads.js"></script>
+  <script type="module" src="database.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -36,9 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 6) Separadores rotativos
   initRotatingSep("rotatingSepImg", [
-    "Images/H1.jpg",
-    "Images/H2.jpg",
-    "Images/V3.jpg",
+    "Images/F1.png",
+    "Images/F2.png",
   ]);
   initRotatingSep("celebrationSepImg", [
     "Images/C1.png",
