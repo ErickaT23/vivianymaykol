@@ -1037,6 +1037,30 @@ a{
     font-weight: 500;
     color: var(--olive-dark);
   }
+  .date-highlight{
+    padding: 8px 18px 24px;
+    text-align: center;
+  }
+  .date-highlight-label,
+  .date-highlight-value{
+    margin: 0;
+  }
+  .date-highlight-label{
+    font-family: var(--cursive);
+    font-size: 34px;
+    background: var(--rose-gold-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .date-highlight-value{
+    margin-top: 2px;
+    font-family: var(--title);
+    font-size: 18px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #23406f;
+  }
   .parents{
     display:flex;
     gap:14px;

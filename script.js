@@ -46,6 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "Images/C4.png",
     "Images/C5.png",
   ]);
+  initRotatingSep("storySepImg", [
+    "Images/S1.png",
+    "Images/S2.png",
+    "Images/S3.png",
+    "Images/S4.png",
+    "Images/S5.png",
+  ]);
 });
 
 /* ===================== INVITADO EN PORTADA ===================== */
