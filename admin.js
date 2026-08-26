@@ -154,6 +154,21 @@
     }
   }
 
+  async function resetGuestRsvp(row) {
+    if (!window.RSVPDatabase?.deleteConfirmation) {
+      setStatus("No se puede resetear el RSVP en este momento.", true);
+      return;
+    }
+
+    try {
+      await window.RSVPDatabase.deleteConfirmation(state.eventId, row.id);
+      setStatus(`RSVP reiniciado para ${row.nombre}.`);
+    } catch (error) {
+      console.error(error);
+      setStatus("No se pudo reiniciar el RSVP.", true);
+    }
+  }
+
   function renderRows() {
     const rows = buildRows();
     updateMetrics(rows);
@@ -169,6 +184,7 @@
           <div class="actions">
             <button type="button" class="btn-mini" data-action="copy" data-id="${row.id}">Copiar link</button>
             <button type="button" class="btn-mini" data-action="edit" data-id="${row.id}">Editar</button>
+            <button type="button" class="btn-mini" data-action="reset-rsvp" data-id="${row.id}">Reset RSVP</button>
             <button type="button" class="btn-mini btn-mini-danger" data-action="toggle" data-id="${row.id}">${row.activo ? "Desactivar" : "Activar"}</button>
           </div>
         </td>
@@ -188,6 +204,11 @@
 
         if (button.dataset.action === "edit") {
           await editGuest(row);
+          return;
+        }
+
+        if (button.dataset.action === "reset-rsvp") {
+          await resetGuestRsvp(row);
           return;
         }
 

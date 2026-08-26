@@ -1,5 +1,5 @@
 import { getApp, getApps, initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
-import { get, getDatabase, onValue, push, ref, set } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-database.js";
+import { get, getDatabase, onValue, push, ref, remove, set } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-database.js";
 
 const firebaseConfig = window.firebaseConfig;
 
@@ -126,6 +126,11 @@ async function saveConfirmation(eventId, confirmation) {
   return payload;
 }
 
+async function deleteConfirmation(eventId, guestId) {
+  await remove(ref(db, getEventRsvpRecordPath(resolveEventId(eventId), guestId)));
+  return { ok: true, eventId: resolveEventId(eventId), guestId: sanitizeFirebaseKey(guestId) };
+}
+
 function mapSnapshotToArray(snapshot) {
   const raw = snapshot?.val();
   if (!raw || typeof raw !== "object") return [];
@@ -203,6 +208,7 @@ window.RSVPDatabase = {
   getInvitadoById,
   getConfirmationByGuestId,
   saveConfirmation,
+  deleteConfirmation,
   subscribeToConfirmations,
   subscribeToInvitados,
   updateInvitado,
