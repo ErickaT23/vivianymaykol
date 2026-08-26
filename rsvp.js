@@ -163,6 +163,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let invitado = getGuestFromURL();
 
+  async function syncConfirmationState() {
+    invitado = getGuestFromURL();
+    resetConfirmUI();
+    toggleGuestCount();
+
+    if (!invitado) return;
+
+    try {
+      const remoteConfirmation = await window.RSVPDatabase?.getConfirmationByGuestId?.(getEventId(), invitado.id);
+      if (!remoteConfirmation) return;
+
+      const okMessage = String(remoteConfirmation?.respuesta || "").toLowerCase() === "no"
+        ? "Lamentamos que no puedas acompañarnos en esta ocasión y agradecemos de corazón tu respuesta."
+        : "Gracias por confirmar tu asistencia. Será un privilegio compartir este día contigo.";
+      markConfirmedUI(okMessage);
+    } catch (error) {
+      console.warn("Verificación inicial de Firebase falló:", error);
+      resetConfirmUI();
+      toggleGuestCount();
+    }
+  }
+
   function paintGuestData() {
     invitado = getGuestFromURL();
 
@@ -192,31 +214,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   paintGuestData();
+  resetConfirmUI();
   toggleGuestCount();
   hideMsg(msg);
 
-  window.addEventListener("guest:updated", paintGuestData);
+  window.addEventListener("guest:updated", () => {
+    paintGuestData();
+    syncConfirmationState();
+  });
   radioYes.addEventListener("change", toggleGuestCount);
   radioNo.addEventListener("change", toggleGuestCount);
 
-  (async () => {
-    if (!invitado) return;
-    try {
-      const remoteConfirmation = await window.RSVPDatabase?.getConfirmationByGuestId?.(getEventId(), invitado.id);
-      if (remoteConfirmation) {
-        const okMessage = String(remoteConfirmation?.respuesta || "").toLowerCase() === "no"
-          ? "Lamentamos que no puedas acompa\u00f1arnos en esta ocasi\u00f3n y agradecemos de coraz\u00f3n tu respuesta."
-          : "Gracias por confirmar tu asistencia. Ser\u00e1 un privilegio compartir este d\u00eda contigo.";
-        markConfirmedUI(okMessage);
-        return;
-      }
-
-      resetConfirmUI();
-    } catch (error) {
-      console.warn("Verificación inicial de Firebase falló:", error);
-      resetConfirmUI();
-    }
-  })();
+  syncConfirmationState();
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
