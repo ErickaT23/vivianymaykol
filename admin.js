@@ -30,6 +30,12 @@
     el.style.color = isError ? "#8b1e1e" : "#6a6470";
   }
 
+  function getErrorMessage(error, fallback) {
+    const message = String(error?.message || "").trim();
+    if (!message) return fallback;
+    return `${fallback} ${message}`;
+  }
+
   function normalizeResponse(value) {
     const safe = String(value || "").trim().toLowerCase();
     if (safe === "si") return "Confirmado";
@@ -92,7 +98,7 @@
       setStatus("Links copiados correctamente.");
     } catch (error) {
       console.error(error);
-      setStatus("No se pudieron copiar los links.", true);
+      setStatus(getErrorMessage(error, "No se pudieron copiar los links."), true);
     }
   }
 
@@ -135,7 +141,7 @@
       setStatus("Invitado actualizado.");
     } catch (error) {
       console.error(error);
-      setStatus("No se pudo actualizar el invitado.", true);
+      setStatus(getErrorMessage(error, "No se pudo actualizar el invitado."), true);
     }
   }
 
@@ -150,7 +156,7 @@
       setStatus(row.activo ? "Invitado desactivado." : "Invitado reactivado.");
     } catch (error) {
       console.error(error);
-      setStatus("No se pudo actualizar el estado del invitado.", true);
+      setStatus(getErrorMessage(error, "No se pudo actualizar el estado del invitado."), true);
     }
   }
 
@@ -165,7 +171,7 @@
       setStatus(`RSVP reiniciado para ${row.nombre}.`);
     } catch (error) {
       console.error(error);
-      setStatus("No se pudo reiniciar el RSVP.", true);
+      setStatus(getErrorMessage(error, "No se pudo reiniciar el RSVP."), true);
     }
   }
 
@@ -227,7 +233,7 @@
       setStatus("Evento y lista base creados/actualizados en Firebase.");
     } catch (error) {
       console.error(error);
-      setStatus("No se pudo crear el evento en Firebase.", true);
+      setStatus(getErrorMessage(error, "No se pudo crear el evento en Firebase."), true);
     }
   }
 
@@ -255,7 +261,7 @@
         setStatus("Invitado guardado correctamente.");
       } catch (error) {
         console.error(error);
-        setStatus("No se pudo guardar el invitado.", true);
+        setStatus(getErrorMessage(error, "No se pudo guardar el invitado."), true);
       }
     });
   }
