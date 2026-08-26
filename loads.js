@@ -99,13 +99,54 @@ function getQueryParam(key) {
   return params.get(key);
 }
 
+function getCurrentEventId() {
+  const eventParam = window.config?.event?.eventIdParam || "eventId";
+  return getQueryParam(eventParam) || window.config?.event?.defaultEventId || "vivianmaykol2026";
+}
+
+function normalizeGuestRecord(guest) {
+  if (!guest) return null;
+
+  const id = String(guest.id || "").trim();
+  const name = String(guest.nombre || guest.name || "").trim();
+  const passes = Math.max(1, Number(guest.pases ?? guest.passes ?? 1) || 1);
+  const active = guest.activo !== false;
+
+  if (!id || !name || !active) return null;
+
+  return {
+    id,
+    nombre: name,
+    name,
+    pases: passes,
+    passes,
+    activo: active,
+  };
+}
+
+async function resolveGuestById(guestId) {
+  if (!guestId) return null;
+
+  const localGuest = normalizeGuestRecord(guests.find((g) => String(g.id) === String(guestId)));
+  if (localGuest) return localGuest;
+
+  try {
+    const remoteGuest = await window.RSVPDatabase?.getInvitadoById?.(getCurrentEventId(), guestId);
+    return normalizeGuestRecord(remoteGuest);
+  } catch (error) {
+    console.warn("No se pudo cargar el invitado desde Firebase:", error);
+    return null;
+  }
+}
+
 function paintGuestCard(guest) {
   const nameEl = document.getElementById("guestCardName");
   const seatsEl = document.getElementById("guestCardSeats");
   const seatsTxtEl = document.getElementById("guestCardSeatsTxt");
-  const passes = Math.max(1, Number(guest?.passes || 1));
+  const name = guest?.nombre || guest?.name;
+  const passes = Math.max(1, Number(guest?.pases ?? guest?.passes ?? 1));
 
-  if (nameEl) nameEl.textContent = guest?.name || "Nombre del invitado";
+  if (nameEl) nameEl.textContent = name || "Nombre del invitado";
   if (seatsEl) seatsEl.textContent = guest ? String(passes) : "x";
   if (seatsTxtEl) seatsTxtEl.textContent = passes === 1 ? "lugar" : "lugares";
 }
@@ -114,7 +155,7 @@ function notifyGuestUpdated() {
   window.dispatchEvent(new CustomEvent("guest:updated", { detail: window.currentGuest || null }));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const guestId = getQueryParam("id");
 
   // Si no hay id, no marcamos error: solo no hay invitado
@@ -125,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const guest = guests.find((g) => String(g.id) === String(guestId));
+  const guest = await resolveGuestById(guestId);
 
   if (guest) {
     window.currentGuest = guest;
@@ -136,9 +177,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const guestNameEl = document.getElementById("guest-name");
     const passesEl = document.getElementById("passes");
 
-    if (guestNameEl) guestNameEl.textContent = guest.name;
+    if (guestNameEl) guestNameEl.textContent = guest.nombre || guest.name;
     if (passesEl) {
-      const p = Number(guest.passes || 1);
+      const p = Number(guest.pases ?? guest.passes ?? 1);
       passesEl.textContent = `${p} ${p === 1 ? "pase" : "pases"}`;
     }
   } else {

@@ -6,6 +6,7 @@ const $$ = (s) => document.querySelector(s);
 document.addEventListener("DOMContentLoaded", () => {
   // 1) Pintar invitado en portada (desde loads.js)
   paintGuestCard();
+  window.addEventListener("guest:updated", paintGuestCard);
 
   // 2) Botón abrir invitación
   const btnOpenInvite = $$("#btnOpenInvite");
@@ -66,9 +67,9 @@ function paintGuestCard() {
 
   const g = window.currentGuest;
 
-  if (g && g.name) {
-    nameEl.textContent = g.name;
-    const p = Number(g.passes || 1);
+  if (g && (g.name || g.nombre)) {
+    nameEl.textContent = g.nombre || g.name;
+    const p = Number(g.pases ?? g.passes ?? 1);
     seatsEl.textContent = String(p);
     if (seatsTxtEl) seatsTxtEl.textContent = p === 1 ? "lugar" : "lugares";
   } else {
