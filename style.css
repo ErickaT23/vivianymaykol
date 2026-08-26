@@ -1417,12 +1417,18 @@ a{
   }
   .rsvp-form select,
   #guest-count{
-    background:var(--gold-text);
-    background-size:220% auto;
-    border-color:rgba(153,121,80,.28);
-    color:#181A27;
-    box-shadow:0 10px 22px rgba(153,121,80,.14);
+    width:min(100%, 180px);
+    min-height:36px;
+    padding:6px 28px 6px 12px;
+    border-radius:999px;
+    background:url("Images/textura-2.png") center/cover no-repeat;
+    border-color:rgba(35,64,111,.24);
+    color:#23406f;
+    box-shadow:0 8px 18px rgba(35,64,111,.10);
     font-family:var(--title);
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:none;
   }
   .rsvp-form #rsvp-name{
     padding:0;
@@ -1825,9 +1831,9 @@ a{
   /* Nombre pareja */
   .closing h3{
     margin: 0;
-    padding: 10px;
+    padding: 5px;
     font-family: var(--cursive);
-    font-size: 28px;
+    font-size: 35px;
     letter-spacing: 0.03em;
     font-weight: 500;
     background:var(--black-gloss-text);

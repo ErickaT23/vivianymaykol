@@ -19,6 +19,14 @@ function showMsg(el, text, type = "ok") {
   el.style.display = "block";
 }
 
+function getDeclineMessage(invitado) {
+  const totalPases = Math.max(1, Number(invitado?.pases || 1));
+  if (totalPases > 1) {
+    return "Lamentamos que no puedan acompa\u00f1arnos. Los extra\u00f1aremos.";
+  }
+  return "Lamentamos que no puedas acompa\u00f1arnos. Te extra\u00f1aremos.";
+}
+
 function hideMsg(el) {
   if (!el) return;
   el.style.display = "none";
@@ -55,6 +63,22 @@ async function apiSend(data) {
     console.warn("apiSend no devolvió JSON. Respuesta:", text.slice(0, 200));
     return { ok: false, raw: text };
   }
+}
+
+function isDuplicateConfirmationResponse(response) {
+  const rawText = String(
+    response?.message
+    || response?.error
+    || response?.status
+    || response?.raw
+    || ""
+  ).toLowerCase();
+
+  return rawText.includes("already")
+    || rawText.includes("confirm")
+    || rawText.includes("duplic")
+    || rawText.includes("existe")
+    || rawText.includes("registrad");
 }
 
 async function saveConfirmationToFirebase(invitado, respuesta, pasesSeleccionados) {
@@ -111,15 +135,21 @@ function markConfirmedUI(message) {
   const form = $("#rsvp-form");
   const btn = $("#btnConfirmarRsvp");
   const msg = $("#msgRsvp");
+  const responseGroup = document.querySelector(".rsvp-response-group");
+  const responseLabel = document.querySelector("#rsvp-form .rsvp-label");
+  const guestCountWrapper = $("#guest-count-wrapper");
 
   if (form) form.classList.add("is-confirmed");
   document.querySelectorAll('#rsvp-form input, #rsvp-form select, #rsvp-form button').forEach((el) => {
     if (!el.hasAttribute("readonly")) el.disabled = true;
   });
 
+  if (responseGroup) responseGroup.style.display = "none";
+  if (responseLabel) responseLabel.style.display = "none";
+  if (guestCountWrapper) guestCountWrapper.style.display = "none";
+
   if (btn) {
-    btn.textContent = "Confirmación enviada ✓";
-    btn.classList.add("rsvp-confirmed");
+    btn.style.display = "none";
   }
 
   if (msg) {
@@ -133,15 +163,21 @@ function resetConfirmUI() {
   const form = $("#rsvp-form");
   const btn = $("#btnConfirmarRsvp");
   const msg = $("#msgRsvp");
+  const responseGroup = document.querySelector(".rsvp-response-group");
+  const responseLabel = document.querySelector("#rsvp-form .rsvp-label");
 
   if (form) form.classList.remove("is-confirmed");
   document.querySelectorAll('#rsvp-form input, #rsvp-form select, #rsvp-form button').forEach((el) => {
     if (!el.hasAttribute("readonly")) el.disabled = false;
   });
 
+  if (responseGroup) responseGroup.style.display = "grid";
+  if (responseLabel) responseLabel.style.display = "block";
+
   if (btn) {
     btn.textContent = "Confirmar asistencia";
     btn.classList.remove("rsvp-confirmed");
+    btn.style.display = "inline-flex";
   }
 
   hideMsg(msg);
@@ -175,8 +211,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!remoteConfirmation) return;
 
       const okMessage = String(remoteConfirmation?.respuesta || "").toLowerCase() === "no"
-        ? "Lamentamos que no puedas acompañarnos en esta ocasión y agradecemos de corazón tu respuesta."
-        : "Gracias por confirmar tu asistencia. Será un privilegio compartir este día contigo.";
+        ? getDeclineMessage(invitado)
+        : "Gracias por confirmar su asistencia. Nos vemos en nuestra boda.";
       markConfirmedUI(okMessage);
     } catch (error) {
       console.warn("Verificación inicial de Firebase falló:", error);
@@ -261,7 +297,16 @@ document.addEventListener("DOMContentLoaded", () => {
         await saveConfirmationToFirebase(invitado, respuesta, pasesSeleccionados);
         const okMessage = respuesta === "SI"
           ? "Gracias por confirmar tu asistencia. Será un privilegio compartir este día contigo."
-          : "Lamentamos que no puedas acompañarnos en esta ocasión y agradecemos de corazón tu respuesta.";
+          : getDeclineMessage(invitado);
+        markConfirmedUI(okMessage);
+        return;
+      }
+
+      if (isDuplicateConfirmationResponse(res)) {
+        await saveConfirmationToFirebase(invitado, respuesta, pasesSeleccionados);
+        const okMessage = respuesta === "SI"
+          ? "Gracias por confirmar su asistencia. Nos vemos en nuestra boda."
+          : getDeclineMessage(invitado);
         markConfirmedUI(okMessage);
         return;
       }
