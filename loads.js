@@ -1,11 +1,11 @@
 // ===================== LOADS.JS =====================
 // 1) Lista de invitados (ejemplo)
 const guests = [
-  { id: "1", name: "Familia Castillo", passes: 4 },
-  { id: "2", name: "Sofia Ramirez", passes: 2 },
-  { id: "3", name: "Daniel Morales", passes: 1 },
-  { id: "4", name: "Valeria Soto", passes: 2 },
-  { id: "5", name: "Familia Herrera", passes: 5 },
+  { id: "1", name: "Raúl Mazariegos & Guadalupe M.", passes: 2 },
+  { id: "2", name: "Luis Mazariegos & Ehel M.", passes: 2 },
+  { id: "3", name: "Hugo Mazariegos & Argelia M.", passes: 3 },
+  { id: "4", name: "Wilson Mazariegos & Brenda M.", passes: 1 },
+  { id: "5", name: "Victoria Turcios & Catherine, Caroline.", passes: 3 },
 ];
 
 window.LocalGuestSeeds = {

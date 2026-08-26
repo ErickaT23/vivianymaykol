@@ -26,7 +26,7 @@ const config = {
   },
   seo: {
     titulo: "Vivian & Maykol | 29.11.2026",
-    descripcion: "Boda de Vivian Galvez y Maykol Roblero - 29 de noviembre de 2026",
+    descripcion: "Boda de Vivian Gálvez y Maykol Roblero - 29 de noviembre de 2026",
     autor: "Two Design"
   },
   pareja: {

@@ -56,7 +56,7 @@ function buildEventConfigSeedPayload(source = window.config) {
   if (!source) return null;
   return {
     eventId: resolveEventId(source?.event?.defaultEventId),
-    bride: "Vivian Galvez",
+    bride: "Vivian Gálvez",
     groom: "Maykol Roblero",
     date: "2026-11-29",
     time: "16:00",

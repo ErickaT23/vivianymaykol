@@ -8,8 +8,8 @@
     --sand: #D7C9AF;
     --line: rgba(24,26,39,.16);
     --card: rgba(240,239,237,.82);
-    --rose-gold-text: linear-gradient(120deg, #7b603d 0%, #997950 24%, #d7c9af 50%, #997950 76%, #7b603d 100%);
-    --gold-text: linear-gradient(135deg, #8f7444 0%, #b89a63 18%, #eee3c9 38%, #d7c9af 50%, #c5aa72 68%, #f5ecda 84%, #8f7444 100%);
+    --rose-gold-text: linear-gradient(120deg, #725733 0%, #906f45 24%, #cebfa3 50%, #906f45 76%, #725733 100%);
+    --gold-text: linear-gradient(135deg, #866b3b 0%, #b08f58 18%, #e8dcc0 38%, #cebfa3 50%, #bc9f67 68%, #efe3cf 84%, #866b3b 100%);
     --black-gloss-text: linear-gradient(135deg, #101524 0%, #16203a 12%, #23406f 24%, #8ba4d1 34%, #dfe7f5 42%, #2c4f88 52%, #18233d 62%, #4d72ad 74%, #f1f5fc 84%, #22365f 92%, #101524 100%);
     --gradient-accent: linear-gradient(120deg, #181A27 0%, #22273B 30%, #997950 62%, #D7C9AF 100%);
 
@@ -275,6 +275,9 @@ a{
     -webkit-text-fill-color:transparent;
     background-clip:text;
     animation:goldShimmer 5s ease-in-out infinite;
+  }
+  .hero-couple-name > span{
+    padding:10px;
   }
   .hero-couple-amp{
     line-height:0.9;
@@ -1049,6 +1052,7 @@ a{
     font-family: var(--cursive);
     font-size: 38px;
     line-height: 1;
+    padding: 10px;
     background: var(--rose-gold-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1800,6 +1804,7 @@ a{
   /* Nombre pareja */
   .closing h3{
     margin: 0;
+    padding: 10px;
     font-family: var(--cursive);
     font-size: 28px;
     letter-spacing: 0.03em;
