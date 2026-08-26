@@ -83,7 +83,7 @@ function isDuplicateConfirmationResponse(response) {
 
 async function saveConfirmationToFirebase(invitado, respuesta, pasesSeleccionados) {
   const rsvpDB = window.RSVPDatabase;
-  if (!rsvpDB?.saveConfirmation || !invitado?.id) return;
+  if (!rsvpDB?.saveConfirmation || !invitado?.id) return false;
 
   try {
     await rsvpDB.saveConfirmation(getEventId(), {
@@ -94,8 +94,10 @@ async function saveConfirmationToFirebase(invitado, respuesta, pasesSeleccionado
       cantidadConfirmada: respuesta === "SI" ? pasesSeleccionados : 0,
       fechaConfirmacion: Date.now(),
     });
+    return true;
   } catch (error) {
     console.warn("No se pudo guardar la confirmación en Firebase:", error);
+    return false;
   }
 }
 
@@ -282,10 +284,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const pasesSeleccionados = respuesta === "SI"
       ? Math.max(1, Number(guestCount.value || invitado.pases || 1))
       : 0;
+    const okMessage = respuesta === "SI"
+      ? "Gracias por confirmar su asistencia. Nos vemos en nuestra boda."
+      : getDeclineMessage(invitado);
 
     btnSubmit.disabled = true;
 
     try {
+      const firebaseSaved = await saveConfirmationToFirebase(invitado, respuesta, pasesSeleccionados);
+      if (firebaseSaved) {
+        markConfirmedUI(okMessage);
+
+        apiSend({
+          guestId: getRemoteGuestId(invitado.id),
+          nombre: invitado.nombre,
+          pases: String(pasesSeleccionados),
+          respuesta,
+        })
+          .then((res) => {
+            if (res && (res.ok === true || res.success === true || isDuplicateConfirmationResponse(res))) return;
+            console.warn("Apps Script no confirmó el guardado, pero Firebase sí lo registró:", res);
+          })
+          .catch((error) => {
+            console.warn("Apps Script falló, pero Firebase sí registró la confirmación:", error);
+          });
+
+        return;
+      }
+
       const res = await apiSend({
         guestId: getRemoteGuestId(invitado.id),
         nombre: invitado.nombre,
@@ -294,19 +320,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (res && (res.ok === true || res.success === true)) {
-        await saveConfirmationToFirebase(invitado, respuesta, pasesSeleccionados);
-        const okMessage = respuesta === "SI"
-          ? "Gracias por confirmar tu asistencia. Será un privilegio compartir este día contigo."
-          : getDeclineMessage(invitado);
         markConfirmedUI(okMessage);
         return;
       }
 
       if (isDuplicateConfirmationResponse(res)) {
         await saveConfirmationToFirebase(invitado, respuesta, pasesSeleccionados);
-        const okMessage = respuesta === "SI"
-          ? "Gracias por confirmar su asistencia. Nos vemos en nuestra boda."
-          : getDeclineMessage(invitado);
         markConfirmedUI(okMessage);
         return;
       }
