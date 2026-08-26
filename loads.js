@@ -99,12 +99,29 @@ function getQueryParam(key) {
   return params.get(key);
 }
 
+function paintGuestCard(guest) {
+  const nameEl = document.getElementById("guestCardName");
+  const seatsEl = document.getElementById("guestCardSeats");
+  const seatsTxtEl = document.getElementById("guestCardSeatsTxt");
+  const passes = Math.max(1, Number(guest?.passes || 1));
+
+  if (nameEl) nameEl.textContent = guest?.name || "Nombre del invitado";
+  if (seatsEl) seatsEl.textContent = guest ? String(passes) : "x";
+  if (seatsTxtEl) seatsTxtEl.textContent = passes === 1 ? "lugar" : "lugares";
+}
+
+function notifyGuestUpdated() {
+  window.dispatchEvent(new CustomEvent("guest:updated", { detail: window.currentGuest || null }));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const guestId = getQueryParam("id");
 
   // Si no hay id, no marcamos error: solo no hay invitado
   if (!guestId) {
     window.currentGuest = null;
+    paintGuestCard(null);
+    notifyGuestUpdated();
     return;
   }
 
@@ -112,6 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (guest) {
     window.currentGuest = guest;
+    paintGuestCard(guest);
+    notifyGuestUpdated();
 
     // Si tienes estos elementos en alguna parte, los llena (opcional)
     const guestNameEl = document.getElementById("guest-name");
@@ -124,6 +143,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   } else {
     window.currentGuest = null;
+    paintGuestCard(null);
+    notifyGuestUpdated();
 
     const guestNameEl = document.getElementById("guest-name");
     if (guestNameEl) guestNameEl.textContent = "Invitado no encontrado";
