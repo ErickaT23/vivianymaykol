@@ -55,11 +55,12 @@
   
   .couple{
     margin:0;
-    font-size:clamp(32px, 7vw, 46px);
+    font-size:40px;
     font-weight:500;
     font-family: var(--cursive);
     font-style:normal;
     letter-spacing:.03em;
+    padding:10px;
     background:var(--black-gloss-text);
     background-size:300% auto;
     -webkit-background-clip:text;
@@ -79,7 +80,7 @@
   
   .tag{
     margin:0;
-    font-size:clamp(38px, 10vw, 62px);
+    font-size:clamp(43px, 10vw, 67px);
     color:transparent;
     font-family: var(--cursive);
     letter-spacing:.02em;
@@ -265,7 +266,7 @@ a{
     flex-direction:column;
     align-items:center;
     font-family:var(--cursive);
-    font-size:clamp(33px, 7.2vw, 50px);
+    font-size:45px;
     font-style:normal;
     font-weight:400;
     line-height:1.05;
@@ -278,6 +279,11 @@ a{
   }
   .hero-couple-name > span{
     padding:10px;
+  }
+  .hero-couple-name > span:not(.hero-couple-amp){
+    display:block;
+    white-space:nowrap;
+    width:100%;
   }
   .hero-couple-amp{
     line-height:0.9;
@@ -324,7 +330,7 @@ a{
 
 .reveal-gold {
     font-family: var(--cursive);
-    font-size: 50px;
+    font-size: 55px;
     margin: 6px 0;
     background:var(--rose-gold-text);
     -webkit-background-clip: text;
@@ -352,7 +358,7 @@ a{
   }
   .quote-script{
     font-family: var(--cursive);
-    font-size:50px;
+    font-size:55px;
     margin:6px 0;
   }
   .quote-top,.quote-bottom{margin:0;font-size:14px;letter-spacing:.06em}
@@ -402,7 +408,7 @@ a{
   .marriage-note-parent-block h3{
     margin:0 0 6px;
     font-family:var(--title);
-    font-size:11px;
+    font-size:15px;
     letter-spacing:.18em;
     text-transform:uppercase;
     background:linear-gradient(135deg, #6f552d 0%, #8a6a39 38%, #a78147 62%, #6f552d 100%);
@@ -414,7 +420,7 @@ a{
     margin:0;
     color:#1c2742;
     font-family:var(--text);
-    font-size:16px;
+    font-size:20px;
     font-style:italic;
     line-height:1.4;
   }
@@ -440,7 +446,7 @@ a{
   }
   .countdown h3{
     margin:0 0 10px;
-    font-size:clamp(34px, 8vw, 54px);
+    font-size:clamp(39px, 8vw, 59px);
     font-family: var(--cursive);
     font-weight:400;
     background:var(--gold-text);
@@ -539,7 +545,7 @@ a{
   .reception-oval h4{
     margin:0 0 8px;
     font-family:var(--cursive);
-    font-size:38px;
+    font-size:43px;
     font-weight:400;
     background:var(--rose-gold-text);
     -webkit-background-clip:text;
@@ -567,7 +573,7 @@ a{
     margin-bottom:14px;
   }
   .ceremony-note-inner h4{
-    font-size:30px;
+    font-size:40px;
     margin-bottom:4px;
     line-height:1;
   }
@@ -653,7 +659,7 @@ a{
     margin-bottom:10px;
   }
   .reception-oval h4{
-    font-size:30px;
+    font-size:35px;
     margin-bottom:4px;
     line-height:1;
   }
@@ -720,7 +726,7 @@ a{
   .itinerary-editorial-note h3{
     margin:0 0 12px;
     font-family:var(--cursive);
-    font-size:32px;
+    font-size:37px;
     font-weight:400;
     text-align:center;
     background:var(--rose-gold-text);
@@ -816,7 +822,7 @@ a{
   .wishes h3{
     margin:0 0 10px;
     font-family:var(--cursive);
-    font-size:38px;
+    font-size:43px;
     font-weight:400;
     background:var(--rose-gold-text);
     -webkit-background-clip:text;
@@ -871,7 +877,7 @@ a{
   .adults-only h3{
     margin:0 0 10px;
     font-family:var(--cursive);
-    font-size:38px;
+    font-size:43px;
     font-weight:400;
     background:var(--rose-gold-text);
     -webkit-background-clip:text;
@@ -890,7 +896,7 @@ a{
   /* ====== CONTADOR HORIZONTAL ====== */
   .count-title{
     font-family: var(--cursive);
-    font-size:28px;
+    font-size:33px;
     margin-bottom:22px;
     color:#3b2d2d;
   }
@@ -1035,7 +1041,7 @@ a{
   .blessing h3{
     font-family: var(--cursive);
     font-style: normal;
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
     font-weight: 500;
     color: var(--olive-dark);
@@ -1050,7 +1056,7 @@ a{
   }
   .date-highlight-label{
     font-family: var(--cursive);
-    font-size: 38px;
+    font-size: 43px;
     line-height: 1;
     padding: 10px;
     background: var(--rose-gold-text);
@@ -1328,7 +1334,7 @@ a{
   .rsvp-editorial-title{
     margin:0 0 12px;
     font-family:var(--cursive);
-    font-size:36px;
+    font-size:41px;
     font-weight:400;
     text-align:center;
     background:var(--rose-gold-text);
@@ -1354,9 +1360,9 @@ a{
   .rsvp-editorial-flower{
     position:absolute;
     right:6%;
-    top:10%;
+    top:40%;
     width:32%;
-    max-width:150px;
+    max-width:90px;
     height:auto;
     z-index:2;
   }
@@ -1390,6 +1396,7 @@ a{
     text-align:center;
   }
   .rsvp-form input[type="text"],
+  .rsvp-form textarea,
   .rsvp-form select{
     width:min(100%, 420px);
     margin:0 auto;
@@ -1403,6 +1410,10 @@ a{
     text-align:center;
     outline:none;
     box-shadow: inset 0 1px 8px rgba(111,61,43,.05);
+  }
+  .rsvp-form textarea{
+    resize:none;
+    min-height:72px;
   }
   .rsvp-form select,
   #guest-count{
@@ -1419,18 +1430,21 @@ a{
     background:transparent;
     box-shadow:none;
     font-family:var(--cursive);
-    font-size:28px;
+    font-size:33px;
     font-style:normal;
+    line-height:1.02;
+    text-align:center;
     background:var(--gold-text);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     background-clip:text;
     pointer-events:none;
+    overflow:hidden;
   }
   .rsvp .btn-outline,
   .rsvp #btnConfirmarRsvp,
   .rsvp .rsvp-radio-option span{
-    background:transparent;
+    background:url("Images/textura-2.png") center/cover no-repeat;
     border-color:#23406f;
     color:#23406f;
     box-shadow:0 8px 18px rgba(35,64,111,.12);
@@ -1439,7 +1453,7 @@ a{
   .rsvp #btnConfirmarRsvp:hover,
   .rsvp .rsvp-radio-option:hover span,
   .rsvp .rsvp-radio-option input:checked + span{
-    background:rgba(35,64,111,.08);
+    background:url("Images/textura-2.png") center/cover no-repeat;
     border-color:#23406f;
     color:#23406f;
   }
@@ -1532,9 +1546,18 @@ a{
       width:46%;
     }
     .hero-couple-name{
-      max-width:280px;
-      font-size:clamp(30px, 9.6vw, 39px);
+      max-width:100%;
+      font-size:40px;
       line-height:1.02;
+    }
+    .couple{
+      font-size:40px;
+    }
+    .marriage-note-parent-block h3{
+      font-size:15px;
+    }
+    .marriage-note-parent-block p{
+      font-size:20px;
     }
     .music-bubble{
       right:14px;
@@ -1555,12 +1578,6 @@ a{
     .marriage-note-text{
       margin-bottom:18px;
       font-size:clamp(13px, 4.4vw, 16px);
-    }
-    .marriage-note-parent-block h3{
-      font-size:10px;
-    }
-    .marriage-note-parent-block p{
-      font-size:15px;
     }
     .countdown-simple{
       gap:8px;
@@ -1587,10 +1604,10 @@ a{
     }
     .ceremony-note-inner h4,
     .reception-oval h4{
-      font-size:22px;
+      font-size:27px;
     }
     .ceremony-note-inner h4{
-      font-size:26px;
+      font-size:31px;
     }
     .ceremony-note-inner .event-note-place,
     .ceremony-note-inner .event-note-location{
@@ -1654,7 +1671,7 @@ a{
       margin-top:-82px;
     }
     .itinerary-editorial-note h3{
-      font-size:28px;
+      font-size:33px;
       margin-bottom:10px;
     }
     .timeline-item{
@@ -1697,7 +1714,11 @@ a{
     .wishes h3,
     .adults-only h3,
     .rsvp-editorial-title{
-      font-size:32px;
+      font-size:37px;
+    }
+    .rsvp-form #rsvp-name{
+      font-size:33px;
+      min-height:72px;
     }
     .dress-editorial-subtitle{
       font-size:14px;
@@ -1733,8 +1754,8 @@ a{
       width:48%;
     }
     .hero-couple-name{
-      max-width:250px;
-      font-size:clamp(28px, 9.4vw, 35px);
+      max-width:100%;
+      font-size:36px;
     }
   }
 /* Separadores normales (una sola foto) */
@@ -1775,7 +1796,7 @@ a{
   .love-quote p {
     color: var(--olive-dark);
     font-family: var(--cursive);
-    font-size: 28px;
+    font-size: 33px;
   }
   .dress, .gifts, .album, .wishes, .love-quote, .closing{
     padding:30px 18px;
